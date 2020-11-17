@@ -1,7 +1,8 @@
 import React, { createContext, Component } from "react";
-import {auth} from "../firebase"
+import { auth } from "../firebase";
+import { generateUserDocument } from "../firebase";
 
-export const UserContext = createContext({user: null});
+export const UserContext = createContext({ user: null });
 
 class UserProvider extends Component {
     state = {
@@ -9,18 +10,18 @@ class UserProvider extends Component {
     };
 
     componentDidMount = () => {
-        auth.onAuthStateChanged(userAuth => {
-          this.setState({ user: userAuth});
+        auth.onAuthStateChanged(async (userAuth) => {
+            const user = await generateUserDocument(userAuth);
+            this.setState({ user });
         });
     };
 
     render() {
         return (
-          <UserContext.Provider value={this.state.user}>
-            {this.props.children}
-          </UserContext.Provider>
+            <UserContext.Provider value={this.state.user}>
+                {this.props.children}
+            </UserContext.Provider>
         );
-    };
-
-};
+    }
+}
 export default UserProvider;

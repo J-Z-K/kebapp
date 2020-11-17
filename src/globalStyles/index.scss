@@ -1,0 +1,26 @@
+@import "./fonts";
+@import "./variables";
+* {
+    // box-sizing: border-box;
+}
+html,
+body {
+    margin: 0;
+    padding: 0;
+    font-size: $font-m;
+    background-color: rgb(10, 10, 10);
+    @media (min-width: $small) {
+        font-size: $font-s;
+    }
+    @media (min-width: $medium) {
+    }
+    @media (min-width: $large) {
+    }
+    @media (min-width: $extra-large) {
+    }
+}
+.container1200 {
+    max-width: 1200px;
+    margin: 0 auto;
+    margin-top: 50px;
+}
